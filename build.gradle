@@ -14,7 +14,7 @@ java {
 }
 
 ext {
-    shoreVersion = "1.9.3"
+    shoreVersion = "2.0.0"
 }
 
 configurations {

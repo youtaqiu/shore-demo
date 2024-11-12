@@ -40,6 +40,7 @@ class RabbitMQControllerTest {
         webTestClient
                 .get().uri("/mq")
                 .exchange()
-                .expectStatus().isUnauthorized();
+                .expectStatus()
+                .isUnauthorized();
     }
 }
