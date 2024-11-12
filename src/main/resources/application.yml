@@ -1,0 +1,52 @@
+server:
+  port: 7600
+spring:
+  application:
+    name: demo
+
+  r2dbc:
+    username: ${database.username}
+    password: ${database.password}
+    url: r2dbc:mysql://${database.url}/${database.name}?useUnicode=true&tlsVersion=TLSv1.2&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
+
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:db/changelog/changelog.yaml
+
+
+  data:
+    redis:
+      repositories:
+        enabled: false
+      host: 192.168.31.244
+      port: 31514
+      database: 0
+      timeout: 10s
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        r2dbc: debug
+
+database:
+  name: shore
+  username: root
+  password: password
+  url: 192.168.31.244:30306
+
+shore:
+  logging:
+    loki:
+      enabled: true
+      http-url: https://loki.rime.sh/loki/api/v1/push
+      http-tenant-id: xxx
+  exception:
+    enable: false
+  rabbitmq:
+    host: 192.168.31.244
+    port: 31688
+    username: guest
+    password: guest
+    virtual-host: /
+

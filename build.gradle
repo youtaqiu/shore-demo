@@ -8,11 +8,13 @@ plugins {
 group = 'sh.rime.demo'
 
 java {
-    sourceCompatibility = '21'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 ext {
-    shoreVersion = "1.9.2"
+    shoreVersion = "1.9.3"
 }
 
 configurations {
@@ -31,8 +33,11 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     annotationProcessor("org.mapstruct:mapstruct-processor")
     implementation("sh.rime.reactor:shore-r2dbc")
     implementation("sh.rime.reactor:shore-log")
@@ -40,6 +45,7 @@ dependencies {
     implementation("sh.rime.reactor:shore-limit")
     implementation("sh.rime.reactor:shore-rabbitmq")
     implementation("sh.rime.reactor:shore-s3")
+    testImplementation("sh.rime.reactor:shore-test")
 
 }
 
@@ -55,7 +61,6 @@ dependencyManagement {
         cacheChangingModulesFor(0, "seconds")
     }
 }
-
 
 jib {
     allowInsecureRegistries = true
