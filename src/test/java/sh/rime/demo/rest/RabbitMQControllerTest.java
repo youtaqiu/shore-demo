@@ -1,4 +1,4 @@
-package sh.rime.demo;
+package sh.rime.demo.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import sh.rime.demo.event.message.DemoMessage;
-import sh.rime.demo.rest.RabbitMQController;
 import sh.rime.reactor.rabbitmq.producer.RabbitMQSender;
 import sh.rime.reactor.test.ShoreWebFluxTest;
 
