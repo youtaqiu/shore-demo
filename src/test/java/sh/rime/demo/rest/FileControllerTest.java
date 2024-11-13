@@ -38,7 +38,8 @@ class FileControllerTest {
                 .expectStatus()
                 .isOk()
                 .expectBody()
-                .jsonPath("$.data").isEqualTo("https://r.rime.sh/1.jpg");
+                .jsonPath("$.data")
+                .isEqualTo("https://r.rime.sh/1.jpg");
         verify(fileService).upload(any(Mono.class));
     }
 

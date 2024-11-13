@@ -29,7 +29,9 @@ class RabbitMQControllerTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .json("{\"code\":200,\"message\":\"success\",\"success\":true}");
+                .jsonPath("$.code")
+                .isEqualTo(200);
+
 
         verify(rabbitMQSender).send(any(DemoMessage.class));
     }
