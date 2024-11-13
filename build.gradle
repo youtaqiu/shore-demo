@@ -75,7 +75,7 @@ dependencyManagement {
 jib {
     allowInsecureRegistries = true
     from {
-        image = "ghcr.io/youtaqiu/jre-otel:21"
+        image = "youtaqiu/jre-otel:21"
     }
     to {
         image = "ghcr.io/youtaqiu/${project.name}"
