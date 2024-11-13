@@ -83,6 +83,36 @@ class FileServiceTest {
                 .verify();
     }
 
+    @Test
+    void testUploadFileFailed() throws IOException {
+        String bucketName = "test-bucket";
+        String customDomain = "https://example.com";
+        String fileName = "test_file.txt";
+        String fileContent = "Hello, World!";
+        String uuid = IdUtil.fastUUID();
+        String objName = uuid + ".txt";
+
+        when(ossProperties.getBucketName()).thenReturn(bucketName);
+        when(ossProperties.getCustomDomain()).thenReturn(customDomain);
+        when(filePart.filename()).thenReturn(fileName);
+        when(filePart.content()).thenReturn(Flux.just(toDataBuffer(fileContent.getBytes(StandardCharsets.UTF_8))));
+        mockStatic(IdUtil.class);
+        when(IdUtil.fastSimpleUUID()).thenReturn(uuid);
+
+        // 模拟上传失败，抛出 IOException
+        doThrow(new IOException("Upload failed")).when(ossTemplate).putObject(eq(bucketName), eq(objName), any(InputStream.class));
+
+        // 调用方法
+        Mono<String> result = fileService.upload(Mono.just(filePart));
+
+        // 验证异常结果
+        StepVerifier.create(result)
+                .expectErrorMatches(throwable -> throwable instanceof ServerException
+                        && throwable.getMessage().equals(ExceptionEnum.UPLOAD_FILE_FAILED.message()))
+                .verify();
+
+        verify(ossTemplate, times(1)).putObject(eq(bucketName), eq(objName), any(InputStream.class));
+    }
 
     private DataBuffer toDataBuffer(byte[] bytes) {
         DataBuffer buffer = new DefaultDataBufferFactory().allocateBuffer(bytes.length);
