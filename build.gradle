@@ -79,10 +79,6 @@ jib {
     }
     to {
         image = "ghcr.io/youtaqiu/${project.name}"
-        auth {
-            username System.getenv("dockerUsername") ?: dockerUsername
-            password System.getenv("dockerPassword") ?: dockerPassword
-        }
         tags = ["latest"]
     }
     container {
