@@ -78,7 +78,7 @@ jib {
         image = "youtaqiu/jre-otel:21"
     }
     to {
-        image = "ghcr.io/youtaqiu/${project.name}"
+        image = "youtaqiu/${project.name}"
         tags = ["latest"]
     }
     container {
