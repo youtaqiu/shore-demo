@@ -16,13 +16,13 @@ jobs:
       - name: Upload Unit Test Reports
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports-ubuntu
+          name: test-reports
           path: '**/build/reports/tests/'
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: JIB container build and publish
-        uses: MathieuSoysal/jib-container-publish.yml@v2.1.5
+        run: ./gradlew jib
         with:
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
