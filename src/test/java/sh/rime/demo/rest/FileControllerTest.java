@@ -25,6 +25,7 @@ class FileControllerTest {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @SuppressWarnings("unchecked")
     void testUpload() {
         FilePart filePart = Mockito.mock(FilePart.class);
         when(fileService.upload(any(Mono.class))).thenReturn(Mono.just("https://r.rime.sh/1.jpg"));
