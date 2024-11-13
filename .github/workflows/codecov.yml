@@ -2,17 +2,33 @@ name: Workflow for Codecov
 on: [push, pull_request]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - name: Set up JDK 21
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@6a9d2a587bdd5edf275605a0fad7ca2ed4c9d5cd
+      - name: Install libraries for Linux
+        run: brew install webp jpeg-xl libheif
+        env:
+          HOMEBREW_NO_INSTALL_CLEANUP: 1
+          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: 21
-      - name: Build with Gradle
-        run: ./gradlew clean build
+          distribution: 'liberica'
+          java-version: '21'
+      - name: Gradle build
+        env:
+          LD_LIBRARY_PATH: /home/linuxbrew/.linuxbrew/lib
+          JAVA_LIBRARY_PATH: /usr/local/lib/
+        run: ./gradlew build
+      - name: Upload Unit Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.os }}
+          path: '**/build/reports/tests/'
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673
         env:
