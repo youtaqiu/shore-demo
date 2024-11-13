@@ -21,8 +21,8 @@ public enum ExceptionEnum implements ServerFailure {
     /**
      * 上传文件失败
      */
-    UPLOAD_FILE_FAILED(2902, "Upload file failed"),
-    ;
+    UPLOAD_FILE_FAILED(2902, "Upload file failed");
+
     /**
      * 错误码
      */
