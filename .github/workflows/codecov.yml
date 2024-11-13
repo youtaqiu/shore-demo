@@ -10,9 +10,6 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@6a9d2a587bdd5edf275605a0fad7ca2ed4c9d5cd
       - name: Install libraries for Linux
         run: brew install webp jpeg-xl libheif
-        env:
-          HOMEBREW_NO_INSTALL_CLEANUP: 1
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -33,3 +30,7 @@ jobs:
         uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Build by jib
+        run: ./gradlew jib

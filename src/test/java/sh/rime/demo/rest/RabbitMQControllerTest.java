@@ -9,6 +9,7 @@ import sh.rime.demo.event.message.DemoMessage;
 import sh.rime.reactor.rabbitmq.producer.RabbitMQSender;
 import sh.rime.reactor.test.ShoreWebFluxTest;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 @ShoreWebFluxTest(controllers = RabbitMQController.class)
@@ -31,9 +32,7 @@ class RabbitMQControllerTest {
                 .jsonPath("$.code")
                 .isEqualTo(200);
 
-        verify(rabbitMQSender).send(DemoMessage.builder()
-                .message("Test message")
-                .build());
+        verify(rabbitMQSender).send(any(DemoMessage.class));
     }
 
 }

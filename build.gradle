@@ -75,10 +75,10 @@ dependencyManagement {
 jib {
     allowInsecureRegistries = true
     from {
-        image = "youtaqiu/jre-otel:21"
+        image = "ghcr.io/youtaqiu/jre-otel:21"
     }
     to {
-        image = "youtaqiu/${project.name}"
+        image = "ghcr.io/youtaqiu/${project.name}"
         auth {
             username System.getenv("dockerUsername") ?: dockerUsername
             password System.getenv("dockerPassword") ?: dockerPassword
