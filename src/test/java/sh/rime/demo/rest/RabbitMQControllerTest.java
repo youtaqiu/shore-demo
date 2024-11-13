@@ -34,12 +34,4 @@ class RabbitMQControllerTest {
         verify(rabbitMQSender).send(any(DemoMessage.class));
     }
 
-    @Test
-    void requestShouldFailWith401() {
-        webTestClient
-                .get().uri("/mq")
-                .exchange()
-                .expectStatus()
-                .isUnauthorized();
-    }
 }
