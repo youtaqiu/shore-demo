@@ -54,7 +54,6 @@ class FileServiceTest {
         when(ossProperties.getCustomDomain()).thenReturn(customDomain);
         when(filePart.filename()).thenReturn(fileName);
         when(filePart.content()).thenReturn(Flux.just(toDataBuffer(fileContent.getBytes(StandardCharsets.UTF_8))));
-        mockStatic(IdUtil.class);
         when(IdUtil.fastSimpleUUID()).thenReturn(uuid);
 
         doNothing().when(ossTemplate).putObject(eq(bucketName), eq(objName), any(InputStream.class));

@@ -18,7 +18,8 @@ class ApplicationTest {
             Application.main(new String[]{});
 
             // 验证 SpringApplication.run 被调用一次，参数为 Application.class 和传入的 args
-            mockedSpringApplication.verify(() -> SpringApplication.run(eq(Application.class), Mockito.any(String[].class)), times(1));
+            mockedSpringApplication.verify(() -> SpringApplication.run(eq(Application.class),
+                    Mockito.any(String[].class)), times(1));
         }
     }
 }
