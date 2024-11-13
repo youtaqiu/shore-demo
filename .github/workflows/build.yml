@@ -23,6 +23,8 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: JIB container build and publish
-        run: ./gradlew jib
-        env:
-          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./gradlew jib \
+          -Djib.to.auth.username=${{ github.actor }} \
+          -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }} \
+          -Djib.to.image="${{ github.actor }}/shore-demo:${GITHUB_REF##*/}"
