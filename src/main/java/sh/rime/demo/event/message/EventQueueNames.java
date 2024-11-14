@@ -3,7 +3,7 @@ package sh.rime.demo.event.message;
 /**
  * @author youta
  **/
-public class EventQueueNames {
+public final class EventQueueNames {
 
     /**
      * Prevent instantiation
