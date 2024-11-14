@@ -5,5 +5,11 @@ package sh.rime.demo.event.message;
  **/
 public class EventQueueNames {
 
-        public static final String DEMO_EVENT = "demo_event";
+    /**
+     * Prevent instantiation
+     */
+    private EventQueueNames() {
+    }
+
+    public static final String DEMO_EVENT = "demo_event";
 }
