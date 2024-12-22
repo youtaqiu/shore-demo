@@ -1,0 +1,27 @@
+version: "v1"
+
+name: shore-demo
+
+workspace:
+  path: /workspace
+  sync:
+    - src
+    - build.gradle
+    - settings.gradle
+
+devContainer:
+  dockerFile: .devcontainer/Dockerfile
+  extensions:
+    - vscjava.vscode-java-pack
+    - vscjava.vscode-gradle
+    - ms-azuretools.vscode-docker
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-21-openjdk
+    GRADLE_USER_HOME: /workspace/.gradle
+
+ports:
+  - 7600
+
+proxy:
+  http: http://127.0.0.1:6152
+  https: http://127.0.0.1:6152

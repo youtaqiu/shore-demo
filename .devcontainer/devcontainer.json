@@ -1,0 +1,30 @@
+{
+  "name": "shore-demo",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21.0.5-amzn",
+      "installMaven": "false",
+      "installGradle": "true",
+      "gradleVersion": "8.11.1"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "vscjava.vscode-java-debug",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "vscjava.vscode-java-pack",
+        "eamodio.gitlens",
+        "vscjava.vscode-gradle",
+        "vmware.vscode-spring-boot"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder}/.gradle,target=/home/vscode/.gradle,type=bind,consistency=cached" 
+  ]
+}

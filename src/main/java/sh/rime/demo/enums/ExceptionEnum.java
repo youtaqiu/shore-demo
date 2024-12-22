@@ -1,4 +1,4 @@
-package sh.rime.demo.enmus;
+package sh.rime.demo.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
