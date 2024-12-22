@@ -1,0 +1,27 @@
+name: Workflow with GraalVM Native Image
+
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'graalce'
+          java-version: 21
+      - name: Build with Gradle and create Native Image
+        run: ./gradlew bootBuildImage
+
+      # Optional: Publish the native image to a container registry
+      - name: Configure Docker (Optional)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Example: Publish on main branch push
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ github.actor }}" --password-stdin
+
+      - name: Push Docker Image (Optional)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Example: Publish on main branch push
+        run: |
+          docker push youtaqiu/shore-demo:native
