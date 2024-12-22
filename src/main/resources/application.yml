@@ -11,6 +11,9 @@ spring:
 
 #  liquibase:
 #    enabled: true
+#    url: jdbc:mysql://${database.url}/${database.name}
+#    user: ${database.username}
+#    password: ${database.password}
 #    change-log: classpath:db/changelog/changelog.yaml
 
 
@@ -18,35 +21,41 @@ spring:
     redis:
       repositories:
         enabled: false
-      host: 192.168.31.244
+      host: 127.0.0.1
       port: 31514
       database: 0
       timeout: 10s
-
 #logging:
 #  level:
 #    org:
 #      springframework:
 #        r2dbc: debug
-
 database:
   name: shore
   username: root
   password: password
-  url: 192.168.31.244:30306
+  url: 127.0.0.1:30306
 
 shore:
+  security:
+    cache: redis
   logging:
     loki:
       enabled: true
       http-url: https://loki.rime.sh/loki/api/v1/push
-      http-tenant-id: xxx
+      http-tenant-id: xxxx
   exception:
     enable: false
   rabbitmq:
-    host: 192.168.31.244
+    host: 127.0.0.1
     port: 31688
     username: guest
     password: guest
     virtual-host: /
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
