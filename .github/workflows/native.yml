@@ -16,7 +16,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }} # For downloading GraalVM
           components: 'native-image' # Install native-image component
       - name: Build with Gradle and create Native Image
-        run: ./gradlew bootBuildImage
+        run: ./gradlew bootBuildImage --imageName youtaqiu/shore-demo:native
 
       # Optional: Publish the native image to a container registry
       - name: Configure Docker (Optional)
@@ -27,4 +27,4 @@ jobs:
       - name: Push Docker Image (Optional)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Example: Publish on main branch push
         run: |
-          docker push youtaqiu/shore-demo:0.0.1
+          docker push youtaqiu/shore-demo:native
