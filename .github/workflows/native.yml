@@ -27,4 +27,4 @@ jobs:
       - name: Push Docker Image (Optional)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Example: Publish on main branch push
         run: |
-          docker push youtaqiu/shore-demo:native
+          docker push youtaqiu/shore-demo:0.0.1
