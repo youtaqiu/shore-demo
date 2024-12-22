@@ -17,12 +17,12 @@ public class UserDetailsServiceImpl implements UserDetailService {
 
     @Override
     public Mono<CurrentUser> loadUserByPhone(String phone) throws UsernameNotFoundException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Mono<CurrentUser> loadUserByOpenId(String openId) throws UsernameNotFoundException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

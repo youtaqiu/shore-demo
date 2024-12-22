@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shore-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shore-demo
+  template:
+    metadata:
+      labels:
+        app: shore-demo
+    spec:
+      containers:
+      - name: shore-demo
+        image: youtaqiu/shore-demo:0.0.1
+        ports:
+        - containerPort: 7600
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shore-demo-service
+spec:
+  selector:
+    app: shore-demo
+  ports:
+  - protocol: TCP
+    port: 7600
+    targetPort: 7600
+  type: LoadBalancer
