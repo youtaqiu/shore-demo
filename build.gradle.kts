@@ -10,7 +10,7 @@ plugins {
 group = "sh.rime.demo"
 version = "0.0.1-SNAPSHOT"
 
-val shoreVersion = "2.3.0"
+val shoreVersion = "2.4.0"
 
 java {
     toolchain {

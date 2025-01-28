@@ -3,26 +3,21 @@ server:
 spring:
   application:
     name: demo
-
+  flyway:
+    url: jdbc:mysql://${database.url}/${database.name}
+    user: ${database.username}
+    password: ${database.password}
   r2dbc:
     username: ${database.username}
     password: ${database.password}
     url: r2dbc:mysql://${database.url}/${database.name}?useUnicode=true&tlsVersion=TLSv1.2&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
-
-#  liquibase:
-#    enabled: true
-#    url: jdbc:mysql://${database.url}/${database.name}
-#    user: ${database.username}
-#    password: ${database.password}
-#    change-log: classpath:db/changelog/changelog.yaml
-
 
   data:
     redis:
       repositories:
         enabled: false
       host: 127.0.0.1
-      port: 31514
+      port: 6379
       database: 0
       timeout: 10s
 #logging:
@@ -34,7 +29,7 @@ database:
   name: shore
   username: root
   password: password
-  url: 127.0.0.1:30306
+  url: 127.0.0.1:3306
 
 shore:
   security:
@@ -43,12 +38,12 @@ shore:
     loki:
       enabled: true
       http-url: https://loki.rime.sh/loki/api/v1/push
-      http-tenant-id: xxxx
+      http-tenant-id: xxx
   exception:
     enable: false
   rabbitmq:
     host: 127.0.0.1
-    port: 31688
+    port: 5672
     username: guest
     password: guest
     virtual-host: /
