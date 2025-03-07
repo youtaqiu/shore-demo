@@ -1,16 +1,16 @@
 plugins {
     java
     jacoco
-    id("org.springframework.boot") version "3.4.2"
+    id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.graalvm.buildtools.native") version "0.10.5"
     id("com.google.cloud.tools.jib") version "3.4.4"
 }
 
 group = "sh.rime.demo"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
-val shoreVersion = "2.4.0"
+val shoreVersion = "2.5.0"
 
 java {
     toolchain {
@@ -41,7 +41,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("org.mapstruct:mapstruct-processor")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+//    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.withType<Test> {
