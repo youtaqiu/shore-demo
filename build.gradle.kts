@@ -1,16 +1,16 @@
 plugins {
     java
     jacoco
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "3.5.0"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.graalvm.buildtools.native") version "0.10.5"
-    id("com.google.cloud.tools.jib") version "3.4.4"
+    id("org.graalvm.buildtools.native") version "0.10.6"
+    id("com.google.cloud.tools.jib") version "3.4.5"
 }
 
 group = "sh.rime.demo"
 version = "0.0.1"
 
-val shoreVersion = "2.5.0"
+val shoreVersion = "2.6.0"
 
 java {
     toolchain {
@@ -18,11 +18,8 @@ java {
     }
 }
 
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
+configurations.compileOnly {
+    extendsFrom(configurations.annotationProcessor.get())
 }
 
 repositories {
